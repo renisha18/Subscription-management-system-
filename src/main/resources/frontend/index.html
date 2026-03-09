@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Subscription Management</h1>
+    <span>Spring Boot + MySQL</span>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Total</div>
+        <div class="stat-value" id="statTotal">—</div>
+      </div>
+      <div class="stat active">
+        <div class="stat-label">Active</div>
+        <div class="stat-value" id="statActive">—</div>
+      </div>
+      <div class="stat expired">
+        <div class="stat-label">Expired</div>
+        <div class="stat-value" id="statExpired">—</div>
+      </div>
+      <div class="stat cancelled">
+        <div class="stat-label">Cancelled</div>
+        <div class="stat-value" id="statCancelled">—</div>
+      </div>
+    </div>
+
+    <!-- Add / Edit Form -->
+    <div class="card" id="addCard">
+      <h2 id="formTitle">Add Subscription</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fName">Subscriber Name *</label>
+          <input type="text" id="fName" placeholder="Jane Doe">
+          <span class="error-msg" id="errName"></span>
+        </div>
+        <div class="form-group">
+          <label for="fEmail">Email *</label>
+          <input type="email" id="fEmail" placeholder="jane@example.com">
+          <span class="error-msg" id="errEmail"></span>
+        </div>
+        <div class="form-group">
+          <label for="fPlan">Plan *</label>
+          <select id="fPlan">
+            <option value="">Select…</option>
+            <option value="Basic">Basic</option>
+            <option value="Standard">Standard</option>
+            <option value="Premium">Premium</option>
+          </select>
+          <span class="error-msg" id="errPlan"></span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fStatus">Status</label>
+          <select id="fStatus">
+            <option value="Active">Active</option>
+            <option value="Expired">Expired</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fStart">Start Date</label>
+          <input type="date" id="fStart">
+        </div>
+        <div class="form-group">
+          <label for="fEnd">End Date</label>
+          <input type="date" id="fEnd">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-primary" id="submitBtn" onclick="submitForm()">Add</button>
+        <button class="btn-secondary" onclick="resetForm()">Clear</button>
+      </div>
+    </div>
+
+    <!-- Subscriptions Table -->
+    <div class="card">
+      <h2>All Subscriptions</h2>
+
+      <div class="toolbar">
+        <input type="text" id="searchInput" placeholder="Search by name or email…">
+        <select id="statusFilter">
+          <option value="">All Statuses</option>
+          <option value="Active">Active</option>
+          <option value="Expired">Expired</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+        <span class="record-count" id="recordCount"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Plan</th>
+              <th>Status</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <div id="emptyState" class="empty-state">No subscriptions found.</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Delete Confirm Dialog -->
+<div class="overlay" id="confirmOverlay">
+  <div class="dialog">
+    <h3>Confirm Delete</h3>
+    <p id="confirmMsg">Are you sure?</p>
+    <div class="dialog-actions">
+      <button class="btn-secondary" onclick="closeDeleteConfirm()">Cancel</button>
+      <button class="btn-danger" style="padding:7px 16px;" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast-container"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
