@@ -2,10 +2,11 @@ trigger:
 - main
 
 pool:
-  vmImage: Default
+  name: Default   # VERY IMPORTANT
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'clean install'
+- script: java -version
+  displayName: 'Check Java'
+
+- script: .\mvnw.cmd clean install
+  displayName: 'Build with Maven Wrapper'
