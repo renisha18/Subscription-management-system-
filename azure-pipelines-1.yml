@@ -1,0 +1,19 @@
+trigger:
+  branches:
+    include:
+    - main
+stages:
+- stage: __default
+  jobs:
+  - job: Job
+    pool:
+      name: Default
+    steps:
+    - task: CmdLine@2
+      displayName: 'Check Java'
+      inputs:
+        script: java -version
+    - task: CmdLine@2
+      displayName: 'Build with Maven Wrapper'
+      inputs:
+        script: .\mvnw.cmd clean install
