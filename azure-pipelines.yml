@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: Default   # VERY IMPORTANT
+  name: Default   T
 
 steps:
 - script: java -version
